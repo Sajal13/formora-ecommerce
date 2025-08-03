@@ -1,8 +1,10 @@
 import App from "@/App";
 import { createBrowserRouter, type RouteObject } from "react-router";
-import { rootPaths } from "./paths";
+import paths, { rootPaths } from "./paths";
 import MainLayout from "@/components/layout/MainLayout";
 import Overview from "@/pages/dashobard/Overview";
+import SalesAnalytics from "@/pages/dashobard/SalesAnalytics";
+import AllProducts from "@/pages/products/AllProducts";
 
 const routes: RouteObject[] = [
   {
@@ -15,6 +17,14 @@ const routes: RouteObject[] = [
           {
             index: true,
             element: <Overview />
+          },
+          {
+            path: paths.salesAnalytics,
+            element: <SalesAnalytics />
+          },
+          {
+            path: paths.allProducts,
+            element: <AllProducts />
           }
         ]
       }

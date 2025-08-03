@@ -104,9 +104,33 @@ const darkPalette = {
 
 // --- Theme Objects ---
 export const lightTheme: Theme = createTheme({
-  palette: lightPalette
+  palette: lightPalette,
+  typography: {
+    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
+    h1: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h2: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h3: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h4: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h5: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h6: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    body1: { fontFamily: `"Roboto", "Poppins", sans-serif` },
+    body2: { fontFamily: `"Roboto", "Poppins", sans-serif` },
+    button: { fontFamily: `"Roboto", "Poppins", sans-serif` }
+  }
 });
 
 export const darkTheme: Theme = createTheme({
-  palette: darkPalette
+  palette: darkPalette,
+  typography: {
+    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
+    h1: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h2: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h3: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h4: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h5: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    h6: { fontFamily: `"Poppins", "Roboto", sans-serif` },
+    body1: { fontFamily: `"Roboto", "Poppins", sans-serif` },
+    body2: { fontFamily: `"Roboto", "Poppins", sans-serif` },
+    button: { fontFamily: `"Roboto", "Poppins", sans-serif` }
+  }
 });
