@@ -19,7 +19,9 @@ const MainLayout = () => {
           }}
         >
           <TopNavbar />
-          <Outlet />
+          <Box sx={{ paddingLeft: 2, paddingTop: 2 }}>
+            <Outlet />
+          </Box>
         </Box>
       </Box>
     </>
