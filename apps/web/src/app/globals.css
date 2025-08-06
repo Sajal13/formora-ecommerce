@@ -26,3 +26,59 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@layer components {
+  .swiper-theme-container {
+    position: relative;
+
+    .swiper-wrapper {
+      z-index: 0 !important;
+      /* This rule will only apply to swiper-wrapper elements inside the container */
+      &.swiper-continuous-autoplay {
+        transition-timing-function: linear;
+      }
+      .swiper-slide {
+        height: auto !important;
+      }
+    }
+
+    .swiper-nav {
+      /* This container for your buttons is now part of the theme */
+      margin-top: 0;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none; /* Allows clicks to pass through */
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        pointer-events: all;
+        cursor: pointer;
+        color: var(--color-neutral-900);
+      }
+    }
+  }
+
+  .custom-swiper-pagination span {
+    opacity: 0.5;
+    background-color: var(--color-neutral-900);
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+  .custom-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.2);
+    background-color: #facc15 !important;
+  }
+  .rating {
+    span {
+      width: 24px !important;
+      height: 24px !important;
+      font-size: 24px !important;
+    }
+  }
+}
