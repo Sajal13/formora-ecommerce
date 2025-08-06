@@ -1,7 +1,7 @@
 "use client";
 
 import React, { PropsWithChildren, Suspense, useRef } from "react";
-import { type HighlightItem } from "@/data/home";
+import { type HighlightItem } from "@/data/products";
 import {
   Swiper as ReactSwiper,
   SwiperSlide,

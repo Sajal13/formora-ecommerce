@@ -1,5 +1,5 @@
 "use client";
-import { TopPickItem } from "@/data/home";
+import { ProductItem } from "@/data/products";
 import React, { useState } from "react";
 import Image from "next/image";
 import { currencyFormat } from "@/utils/helper";
@@ -10,7 +10,7 @@ import Swiper from "@/components/base/Swiper";
 import { SwiperSlide } from "swiper/react";
 
 interface TopPicksForYouProps {
-  data: TopPickItem[];
+  data: ProductItem[];
 }
 
 const TopPicksForYou = ({ data }: TopPicksForYouProps) => {
@@ -32,7 +32,7 @@ const TopPicksForYou = ({ data }: TopPicksForYouProps) => {
         loop={false}
         autoplay={false}
         pagination={false}
-        centeredSlides={true}
+        centerInsufficientSlides={true}
         onSwiper={(swiper) => {
           setIsBeginning(swiper.isBeginning);
           setIsEnd(swiper.isEnd);
@@ -41,7 +41,7 @@ const TopPicksForYou = ({ data }: TopPicksForYouProps) => {
           setIsBeginning(swiper.isBeginning);
           setIsEnd(swiper.isEnd);
         }}
-        slidesPerView={1}
+        slidesPerView={4}
         breakpoints={{
           0: { slidesPerView: 1 },
           768: { slidesPerView: 2 },
@@ -67,7 +67,6 @@ const TopPicksForYou = ({ data }: TopPicksForYouProps) => {
                     {item.title}
                   </h5>
                   <h4 className="text-xl lg:text-2xl font-medium text-neutral-900 mb-3">
-                    <span className="me-1">BDT</span>
                     {currencyFormat(item.price)}
                   </h4>
                   <div>

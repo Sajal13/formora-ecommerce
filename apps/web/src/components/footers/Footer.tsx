@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = (props: Props) => {
+const Footer = () => {
   return <div>Footer</div>;
 };
 
