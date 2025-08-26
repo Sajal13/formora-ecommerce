@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import TopNavbar from "@/components/navbars/TopNavbar";
+import TopNavbar from "@/components/navbars/Navbar";
 import Footer from "@/components/footers/Footer";
 
 const poppins = Poppins({
@@ -48,11 +48,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
-        <TopNavbar />
-        {children}
-        <Footer />
-      </body>
+      <head>
+        <link rel="icon" href="/favicon/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon/favicon-16x16.png"
+        />
+
+        {/* Apple Touch Icon */}
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicon/apple-touch-icon.png"
+        />
+
+        {/* Web Manifest */}
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+      </head>
+      <body className={`${poppins.className} antialiased`}>{children}</body>
     </html>
   );
 }

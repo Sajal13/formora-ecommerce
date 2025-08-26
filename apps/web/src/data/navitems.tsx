@@ -27,22 +27,22 @@ export const routes: Route[] = [
       {
         id: 3,
         label: "All Products",
-        href: "#"
+        href: "/products"
       },
       {
         id: 4,
         label: "Living Room Furniture",
-        href: "#"
+        href: "/products/living-room-furniture"
       },
       {
         id: 5,
         label: "Bedroom Furniture",
-        href: "#",
+        href: "/products/bedroom-furniture",
         pages: [
           {
             id: 6,
             label: "Beds",
-            href: "#"
+            href: "/products/bedroom-furniture/beds"
           },
           {
             id: 7,

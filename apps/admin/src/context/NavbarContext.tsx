@@ -7,6 +7,8 @@ interface SidebarContextType {
   toggleSidebar: () => void;
   DRAWER_WIDTH: number;
   COLLAPSE_WIDTH: number;
+  handleDrawerToggle: () => void;
+  handleCollapseToggle: () => void;
 }
 
 export const SidebarContext = createContext<SidebarContextType | undefined>(

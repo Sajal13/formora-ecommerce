@@ -23,14 +23,14 @@ export const whyUs: WhyUs[] = [
   {
     id: 2,
     label: "Timely Delivery",
-    image: TruckWithFurniture,
+    image: Delivery,
     description:
       "We ensure on-time delivery, so you can plan your setup without delays or disruptions."
   },
   {
     id: 3,
     label: "Home Delivery Service",
-    image: Delivery,
+    image: TruckWithFurniture,
     description:
       "Enjoy doorstep delivery of your furniture with proper handling and care."
   },

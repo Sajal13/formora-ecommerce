@@ -14,6 +14,14 @@ export const SidebarProvider = ({ children }: PropsWithChildren) => {
     isSmallScreen ? setOpen((prev) => !prev) : setCollapse((prev) => !prev);
   };
 
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
+  const handleCollapseToggle = () => {
+    setCollapse(!collapsed);
+  };
+
   return (
     <SidebarContext
       value={{
@@ -22,7 +30,9 @@ export const SidebarProvider = ({ children }: PropsWithChildren) => {
         isSmallScreen,
         open,
         DRAWER_WIDTH,
-        COLLAPSE_WIDTH
+        COLLAPSE_WIDTH,
+        handleDrawerToggle,
+        handleCollapseToggle
       }}
     >
       {children}

@@ -1,3 +1,4 @@
+// src/components/VerticalNavbar.tsx
 import { useSidebar } from "@/hooks/useSidebar";
 import {
   Avatar,
@@ -5,6 +6,7 @@ import {
   Collapse,
   Divider,
   Drawer,
+  IconButton,
   List,
   ListItemButton,
   ListItemIcon,
@@ -19,10 +21,19 @@ import Avatar1 from "@/assets/images/avatar/avatar-1.png";
 import routes from "@/routes/siteMaps";
 import { Fragment, useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const VerticalNavbar = () => {
   const theme = useTheme();
-  const { collapsed, DRAWER_WIDTH, COLLAPSE_WIDTH } = useSidebar();
+  const {
+    collapsed,
+    open,
+    isSmallScreen,
+    DRAWER_WIDTH,
+    COLLAPSE_WIDTH,
+    handleDrawerToggle,
+    handleCollapseToggle
+  } = useSidebar();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,22 +47,8 @@ const VerticalNavbar = () => {
 
   const isRouteActive = (path: string) => location.pathname === path;
 
-  return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: collapsed ? COLLAPSE_WIDTH : DRAWER_WIDTH,
-        "& .MuiDrawer-paper": {
-          width: collapsed ? COLLAPSE_WIDTH : DRAWER_WIDTH,
-          boxSizing: "border-box",
-          overflow: "hidden",
-          transition: "all 0.3s",
-          backgroundColor: theme.palette.background.paper
-        },
-        transition: "all 0.3s",
-        backgroundColor: theme.palette.background.paper
-      }}
-    >
+  const drawerContent = (
+    <>
       <Toolbar>
         <Stack direction="row" spacing={2} alignItems="center">
           <Avatar
@@ -62,7 +59,7 @@ const VerticalNavbar = () => {
             alt="avatar-1"
             src={Avatar1}
           />
-          <Box>
+          <Box sx={{ display: collapsed && !isSmallScreen ? "none" : "block" }}>
             <Typography
               variant="body1"
               color={theme.palette.text.primary}
@@ -74,6 +71,11 @@ const VerticalNavbar = () => {
             <Typography variant="body2">Admin</Typography>
           </Box>
         </Stack>
+        {isSmallScreen && (
+          <IconButton onClick={handleDrawerToggle}>
+            <CloseIcon />
+          </IconButton>
+        )}
       </Toolbar>
       <Divider />
       <List>
@@ -156,7 +158,50 @@ const VerticalNavbar = () => {
           </Fragment>
         ))}
       </List>
-    </Drawer>
+    </>
+  );
+
+  return (
+    <nav>
+      {/* Permanent drawer for large screens */}
+      {!isSmallScreen && (
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: collapsed ? COLLAPSE_WIDTH : DRAWER_WIDTH,
+            "& .MuiDrawer-paper": {
+              width: collapsed ? COLLAPSE_WIDTH : DRAWER_WIDTH,
+              boxSizing: "border-box",
+              overflow: "hidden",
+              transition: "all 0.3s"
+            }
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+
+      {/* Temporary drawer for small screens */}
+      {isSmallScreen && (
+        <Drawer
+          variant="temporary"
+          open={open}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true // Better performance on mobile
+          }}
+          sx={{
+            display: { xs: "block", lg: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: DRAWER_WIDTH
+            }
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+    </nav>
   );
 };
 

@@ -1,3 +1,4 @@
+// src/components/TopNavbar.tsx
 import { useThemeContext } from "@/hooks/useThemeContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -45,16 +46,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const TopNavbar = () => {
   const theme = useTheme();
   const { mode, toggleColorMode } = useThemeContext();
-  const { toggleSidebar, collapsed } = useSidebar();
+  const { toggleSidebar, isSmallScreen, open, collapsed } = useSidebar();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const open = Boolean(anchorEl);
+  const menuOpen = Boolean(anchorEl);
   const handleClick = (e: MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const menuIcon = isSmallScreen ? (
+    open ? (
+      <CloseIcon />
+    ) : (
+      <MenuIcon />
+    )
+  ) : collapsed ? (
+    <MenuIcon />
+  ) : (
+    <CloseIcon />
+  );
+
   return (
     <AppBar
       position="sticky"
@@ -84,11 +98,10 @@ const TopNavbar = () => {
               color: theme.palette.text.primary
             }}
           >
-            {collapsed ? <CloseIcon /> : <MenuIcon />}
+            {menuIcon}
           </IconButton>
           <Typography variant="h6">Formora Admin</Typography>
         </Stack>
-
         <Box>
           <IconButton onClick={toggleColorMode}>
             {mode === "light" ? <LightModeIcon /> : <DarkModeIcon />}
@@ -106,9 +119,9 @@ const TopNavbar = () => {
             <IconButton
               onClick={handleClick}
               sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
+              aria-controls={menuOpen ? "account-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={menuOpen ? "true" : undefined}
             >
               <Avatar
                 sx={{
@@ -125,7 +138,7 @@ const TopNavbar = () => {
           <Menu
             anchorEl={anchorEl}
             id="account-menu"
-            open={open}
+            open={menuOpen}
             onClose={handleClose}
             onClick={handleClose}
             slotProps={{

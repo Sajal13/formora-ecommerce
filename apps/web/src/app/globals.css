@@ -81,4 +81,97 @@ body {
       font-size: 24px !important;
     }
   }
+
+  .scrollbar {
+    /* For WebKit browsers */
+    &::-webkit-scrollbar {
+      width: 12px !important;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: oklch(43.9% 0 0);
+      border-radius: 50rem;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: oklch(20.5% 0 0);
+    }
+
+    /* For Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Optional: custom arrow */
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGZpbGw9IiMxNzE3MTciIGQ9Ik0yOTcuNCA0NzAuNkMzMDkuOSA0ODMuMSAzMzAuMiA0ODMuMSAzNDIuNyA0NzAuNkw1MzQuNyAyNzguNkM1NDcuMiAyNjYuMSA1NDcuMiAyNDUuOCA1MzQuNyAyMzMuM0M1MjIuMiAyMjAuOCA1MDEuOSAyMjAuOCA0ODkuNCAyMzMuM0wzMjAgNDAyLjdMMTUwLjYgMjMzLjRDMTM4LjEgMjIwLjkgMTE3LjggMjIwLjkgMTA1LjMgMjMzLjRDOTIuOCAyNDUuOSA5Mi44IDI2Ni4yIDEwNS4zIDI3OC43TDI5Ny4zIDQ3MC43eiIvPjwvc3ZnPg==");
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 1.2em;
+    padding-right: 2.5em;
+  }
+
+  .react-range {
+    display: flex;
+    width: 100%;
+
+    .react-range-track {
+      width: 100%;
+      border: none;
+      align-self: center;
+      border-radius: 3px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+    }
+    .react-range-thumb {
+      width: 1rem;
+      height: 1.5rem;
+      background: #ffffff;
+      border: 1px solid #cbd0dd;
+      border-radius: 6px;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::after {
+        margin-left: 5px;
+      }
+      &::before {
+        margin-right: 5px;
+      }
+      &::after,
+      &::before {
+        position: absolute;
+        content: "";
+        background: #cbd0dd;
+        height: 10px;
+        width: 1px;
+      }
+
+      &:hover {
+        background: #ffffff;
+      }
+
+      &:hover .react-range-tooltip {
+        display: block;
+      }
+
+      .react-range-tooltip {
+        &.show {
+          display: block;
+        }
+        position: absolute;
+        top: -2.313rem;
+        display: none;
+        padding: 5px;
+        background: oklch(87.2% 0.01 258.338);
+        border-radius: 6px;
+      }
+    }
+  }
 }

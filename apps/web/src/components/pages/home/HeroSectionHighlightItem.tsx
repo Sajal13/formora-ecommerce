@@ -2,7 +2,6 @@ import Button from "@/components/base/Button";
 import { HighlightItem } from "@/data/products";
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
 
 const HeroSectionHighlightItem = ({
   highlightItem
