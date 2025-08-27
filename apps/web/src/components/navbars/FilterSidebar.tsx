@@ -24,8 +24,6 @@ interface AccordionItemProps {
   register: ReturnType<typeof useForm<FilterFormValues>>["register"];
 }
 
-const DEFAULT_PRICE: [number, number] = [100, 5000];
-
 const AccordionItem = ({
   item,
   isOpen,
@@ -73,7 +71,11 @@ const FilterSidebar = () => {
   const searchParams = useSearchParams();
   const pathName = usePathname();
 
-  const { showFilter, toggleFilter, setShowFilter } = useCategoryFilterStore();
+  const { showFilter, toggleFilter, setShowFilter, maxPrice } =
+    useCategoryFilterStore();
+
+  const DEFAULT_PRICE: [number, number] = [0, maxPrice];
+
   const [values, setValues] = useState<number[]>(DEFAULT_PRICE);
 
   const { register, setValue, watch } = useForm<FilterFormValues>({
@@ -145,12 +147,19 @@ const FilterSidebar = () => {
     }
 
     router.push(`${pathName}?${params.toString()}`, { scroll: false });
-  }, [filters, router, searchParams, pathName, showCategoriesAccordion]);
+  }, [
+    filters,
+    router,
+    searchParams,
+    pathName,
+    showCategoriesAccordion,
+    DEFAULT_PRICE
+  ]);
 
   return (
     <div
       className={classNames(
-        `fixed xl:static top-0 left-0 h-screen transition-all
+        `fixed xl:static top-0 left-0 h-screen xl:h-auto transition-all
         z-50 xl:z-0 bg-white border-r border-gray-200 overflow-hidden`,
         {
           "translate-x-0 w-64": showFilter,
@@ -191,7 +200,11 @@ const FilterSidebar = () => {
             <p className="pb-3 font-medium">Price</p>
             <ReactRange
               values={values}
+              max={maxPrice}
               onChange={(val) => {
+                setValues(val);
+              }}
+              onFinalChange={(val) => {
                 setValues(val);
                 setValue("price", val, { shouldDirty: true });
               }}

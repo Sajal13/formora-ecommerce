@@ -8,6 +8,7 @@ import Button from "@/components/base/Button";
 import Link from "next/link";
 import Swiper from "@/components/base/Swiper";
 import { SwiperSlide } from "swiper/react";
+import ProductCard from "@/components/cards/ProductCard";
 
 interface TopPicksForYouProps {
   data: ProductItem[];
@@ -53,31 +54,7 @@ const TopPicksForYou = ({ data }: TopPicksForYouProps) => {
       >
         {data.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="flex justify-center md:justify-start">
-              <div className="">
-                <Image
-                  src={item.thumbnail}
-                  alt="top picks"
-                  width={280}
-                  height={280}
-                  className="mb-3"
-                />
-                <div>
-                  <h5 className="text-sm lg:text-base text-neutral-900 mb-3 font-medium">
-                    {item.title}
-                  </h5>
-                  <h4 className="text-xl lg:text-2xl font-medium text-neutral-900 mb-3">
-                    {currencyFormat(item.price)}
-                  </h4>
-                  <div>
-                    <Rating
-                      rating={item.rating}
-                      className="text-warning pointer-events-none rating"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ProductCard item={item} rating={true} />
           </SwiperSlide>
         ))}
       </Swiper>

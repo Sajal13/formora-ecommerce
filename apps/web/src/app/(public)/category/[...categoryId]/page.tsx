@@ -1,4 +1,5 @@
 import React from "react";
+import ProductList from "@/components/pages/category/ProductList";
 
 interface Props {
   params: {
@@ -8,11 +9,18 @@ interface Props {
 }
 
 const Page = async ({ params, searchParams }: Props) => {
-  const [category, subCategory] = params.categoryId;
-  const { priceMin, priceMax, size, availability } = searchParams;
-  console.log(category, subCategory);
-  console.log(priceMin, priceMax, size, availability);
-  return <div>Category Page {category}</div>;
+  const { categoryId } = await params;
+  const [category, subCategory] = categoryId;
+  const query = searchParams;
+  return (
+    <div className="container mx-auto py-3">
+      <ProductList
+        category={category}
+        subCategory={subCategory}
+        searchParams={query}
+      />
+    </div>
+  );
 };
 
 export default Page;

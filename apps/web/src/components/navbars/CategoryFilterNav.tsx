@@ -21,7 +21,7 @@ const CategoryFilterNav = () => {
 
   // You can still use your Zustand store if needed, but the primary source of truth
   // for the select field's value should be this local state for instant updates.
-  const { showFilter, toggleFilter } = useCategoryFilterStore();
+  const { showFilter, toggleFilter, totalItems } = useCategoryFilterStore();
 
   // 2. Add a useEffect to sync local state with URL changes.
   // This is important for when the user navigates back/forward or modifies the URL manually.
@@ -72,7 +72,7 @@ const CategoryFilterNav = () => {
 
         <div className="flex items-center gap-3">
           <p className="text-gray-700 font-medium me-2 hidden md:block">
-            32 results
+            {totalItems} results
           </p>
 
           <FormSelect

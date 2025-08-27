@@ -33,7 +33,7 @@ const CategoryLayout = ({
         <CategoryFilterNav />
         <div className="flex border-b border-b-gray-200">
           <FilterSidebar />
-          <div className="flex-1 px-4 py-2">{children}</div>
+          <div className="flex-1 px-6 md:px-8 py-2">{children}</div>
         </div>
       </Suspense>
     </>

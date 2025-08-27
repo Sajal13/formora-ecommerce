@@ -12,6 +12,7 @@ interface ReactRangeProps {
   trackHeight?: string;
   tipFormatter?: (value: number) => React.ReactNode;
   onChange?: (value: number[]) => void;
+  onFinalChange?: (value: number[]) => void;
   className?: string;
   draggableTrack?: boolean;
   alwaysShowTooltip?: boolean;
@@ -29,6 +30,7 @@ const ReactRange = ({
   variant = "primary",
   trackHeight = "0.75rem",
   onChange = () => {},
+  onFinalChange = () => {},
   values,
   className,
   draggableTrack = false,
@@ -96,6 +98,7 @@ const ReactRange = ({
       max={max}
       draggableTrack={draggableTrack}
       onChange={onChange}
+      onFinalChange={onFinalChange}
       values={values}
       step={step}
       renderThumb={Thumb}
