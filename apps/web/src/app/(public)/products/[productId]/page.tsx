@@ -1,4 +1,6 @@
 import React from "react";
+import { getProductById } from "@/utils/products";
+import ProductDetailsContainer from "@/components/pages/product-details/Index";
 
 interface Props {
   params: {
@@ -9,8 +11,13 @@ interface Props {
 const Page = async ({ params }: Props) => {
   const product = await params;
   const { productId } = product;
-  console.log(productId);
-  return <div>{productId}</div>;
+  const data = await getProductById(productId);
+  console.log(data);
+  return (
+    <>
+      <ProductDetailsContainer item={data} />
+    </>
+  );
 };
 
 export default Page;

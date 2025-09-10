@@ -34,14 +34,11 @@ const ProductList = ({
         (p: ProductItem) => p.price >= priceMin && p.price <= priceMax
       );
 
-      const computedMax = max(
-        data.products.map((item: ProductItem) => item.price)
+      const prices: number[] = data.products.map(
+        (item: ProductItem) => item.price
       );
-      const maxPrice =
-        typeof computedMax === "number" && isFinite(computedMax)
-          ? computedMax
-          : 10000;
-      setMaxPrice(maxPrice);
+      const maxPrice = max(prices) ?? 0;
+      setMaxPrice(maxPrice > 0 ? maxPrice : 1000); // default fallback
       setTotalItems(filtered.length);
       setProducts(filtered);
     };
@@ -57,16 +54,11 @@ const ProductList = ({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
       {products.map((product) => (
-        <Link
+        <ProductCard
           key={product.id}
-          href={`/products/${product.id}`}
-          className="group"
-        >
-          <ProductCard
-            item={product}
-            className="border border-transparent group"
-          />
-        </Link>
+          item={product}
+          className="border border-transparent group"
+        />
       ))}
     </div>
   );

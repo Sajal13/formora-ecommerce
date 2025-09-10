@@ -1,3 +1,11 @@
+export interface Review {
+  comment: string;
+  date: string;
+  rating: number;
+  reviewerEmail: string;
+  reviewerName: string;
+}
+
 export interface HighlightItem {
   id: number;
   title: string;
@@ -21,6 +29,19 @@ export interface ProductCategory {
   imageUrl: string;
   featured: boolean;
   subCategories: { id: number; name: string; slug: string }[];
+}
+
+export interface Product extends ProductItem {
+  stock: number;
+  tags: string[];
+  brand: string;
+  availabilityStatus: string;
+  discountPercentage: number;
+  returnPolicy: string;
+  reviews: Review[];
+  sku: string;
+  warrantyInformation: string;
+  shippingInformation: string;
 }
 
 export const categories: ProductCategory[] = [

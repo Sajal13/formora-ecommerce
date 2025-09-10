@@ -1,10 +1,8 @@
 "use client";
 
-import React, { PropsWithChildren, Suspense, useRef } from "react";
-import { type HighlightItem } from "@/data/products";
+import React, { PropsWithChildren, useRef } from "react";
 import {
   Swiper as ReactSwiper,
-  SwiperSlide,
   SwiperProps as ReactSwiperProps
 } from "swiper/react";
 import "swiper/css";
@@ -18,6 +16,7 @@ interface SwiperProps extends ReactSwiperProps {
   centeredSlides?: boolean;
   nextButtonClassName?: string;
   prevButtonClassName?: string;
+  className?: string;
 }
 
 const Swiper = ({
@@ -28,6 +27,7 @@ const Swiper = ({
   nextButtonClassName,
   prevButtonClassName,
   children,
+  className,
   ...rest
 }: PropsWithChildren<SwiperProps>) => {
   const navigationNextRef = useRef<HTMLButtonElement | null>(null);
@@ -35,14 +35,19 @@ const Swiper = ({
   const paginationRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="swiper-theme-container w-full h-full relative">
+    <div
+      className={classNames(
+        "swiper-theme-container w-full h-full relative",
+        className
+      )}
+    >
       {/* Navigation Buttons */}
       {navigation && (
         <div className="swiper-nav z-10">
           <button
             ref={navigationPrevRef}
             className={classNames(
-              "rounded-full z-30 swiper-button-prev text-neutral-900 absolute left-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
+              "rounded-full z-40 swiper-button-prev text-neutral-900 absolute left-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
               prevButtonClassName
             )}
             style={navigationPosition}
@@ -52,7 +57,7 @@ const Swiper = ({
           <button
             ref={navigationNextRef}
             className={classNames(
-              "rounded-full z-30 swiper-button-next text-neutral-900 absolute right-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
+              "rounded-full z-40 swiper-button-next text-neutral-900 absolute right-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
               nextButtonClassName
             )}
             style={navigationPosition}
@@ -72,7 +77,6 @@ const Swiper = ({
 
       <ReactSwiper
         loop={true}
-        slidesPerView={1}
         centeredSlides={centeredSlides}
         autoplay={{
           delay: 7000,

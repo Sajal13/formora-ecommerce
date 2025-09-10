@@ -1,5 +1,6 @@
 import Button from "@/components/base/Button";
 import { HighlightItem } from "@/data/products";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -22,8 +23,9 @@ const HeroSectionHighlightItem = ({
         </Button>
       </div>
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
+          height={400}
+          width={400}
           src={highlightItem.thumbnail}
           alt="ThumnailImage"
           className="h-full w-full"

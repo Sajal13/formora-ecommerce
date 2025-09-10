@@ -74,16 +74,14 @@ const FilterSidebar = () => {
   const { showFilter, toggleFilter, setShowFilter, maxPrice } =
     useCategoryFilterStore();
 
-  const DEFAULT_PRICE: [number, number] = [0, maxPrice];
-
-  const [values, setValues] = useState<number[]>(DEFAULT_PRICE);
+  const [values, setValues] = useState<number[]>([0, maxPrice]);
 
   const { register, setValue, watch } = useForm<FilterFormValues>({
     defaultValues: {
       availability: [],
       categories: [],
       size: [],
-      price: DEFAULT_PRICE
+      price: values
     }
   });
 
@@ -136,8 +134,7 @@ const FilterSidebar = () => {
     // Handle price only if changed from default
     if (
       Array.isArray(filters.price) &&
-      (filters.price[0] !== DEFAULT_PRICE[0] ||
-        filters.price[1] !== DEFAULT_PRICE[1])
+      (filters.price[0] !== values[0] || filters.price[1] !== values[1])
     ) {
       params.set("priceMin", String(filters.price[0]));
       params.set("priceMax", String(filters.price[1]));
@@ -153,8 +150,15 @@ const FilterSidebar = () => {
     searchParams,
     pathName,
     showCategoriesAccordion,
-    DEFAULT_PRICE
+    values
   ]);
+
+  useEffect(() => {
+    if (maxPrice > 0) {
+      setValues([0, maxPrice]);
+      setValue("price", [0, maxPrice]);
+    }
+  }, [maxPrice, setValue]);
 
   return (
     <div
@@ -200,7 +204,7 @@ const FilterSidebar = () => {
             <p className="pb-3 font-medium">Price</p>
             <ReactRange
               values={values}
-              max={maxPrice}
+              max={maxPrice || 1000}
               onChange={(val) => {
                 setValues(val);
               }}

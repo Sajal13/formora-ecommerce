@@ -4,6 +4,7 @@ import { currencyFormat } from "@/utils/helper";
 import Image from "next/image";
 import Rating from "@/components/base/Rating";
 import classNames from "classnames";
+import Link from "next/link";
 
 interface ProductCardProps {
   item: ProductItem;
@@ -13,7 +14,8 @@ interface ProductCardProps {
 
 const ProductCard = ({ rating = false, className, item }: ProductCardProps) => {
   return (
-    <div
+    <Link
+      href={`/products/${item.id}`}
       className={classNames(
         "flex justify-center md:justify-start transition-all duration-500",
         className
@@ -51,7 +53,7 @@ const ProductCard = ({ rating = false, className, item }: ProductCardProps) => {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

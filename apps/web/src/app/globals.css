@@ -9,6 +9,7 @@
   --muted: #9f9f9f;
   --danger: #ff2400;
   --warning: #ffa500;
+  --primary-200: #ffda5b;
 }
 
 @theme inline {
@@ -20,6 +21,7 @@
   --color-muted: var(--muted);
   --color-danger: var(--danger);
   --color-warning: var(--warning);
+  --color-primary-200: var(--primary-200);
 }
 
 body {
@@ -173,5 +175,8 @@ body {
         border-radius: 6px;
       }
     }
+  }
+  ::-webkit-inner-spin-button {
+    display: none;
   }
 }

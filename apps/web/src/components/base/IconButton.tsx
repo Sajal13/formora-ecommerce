@@ -31,7 +31,7 @@ const IconButton = ({
     "focus:outline-none",
     "bg-transparent",
     "hover:bg-gray-200",
-    "hover: rounded-full",
+    "hover:rounded-full",
     "text-neutral-900",
     "cursor-pointer",
     classNames({
