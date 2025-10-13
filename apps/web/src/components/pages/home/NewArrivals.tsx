@@ -2,7 +2,7 @@
 
 import Button from "@/components/base/Button";
 import Swiper from "@/components/base/Swiper";
-import { ProductItem } from "@/data/products";
+import { ProductItem } from "@/types/products";
 import Image from "next/image";
 import React from "react";
 import { SwiperSlide } from "swiper/react";

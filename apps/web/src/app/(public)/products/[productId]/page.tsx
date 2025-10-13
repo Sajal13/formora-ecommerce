@@ -12,7 +12,6 @@ const Page = async ({ params }: Props) => {
   const product = await params;
   const { productId } = product;
   const data = await getProductById(productId);
-  console.log(data);
   return (
     <>
       <ProductDetailsContainer item={data} />

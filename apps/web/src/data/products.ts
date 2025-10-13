@@ -1,48 +1,7 @@
-export interface Review {
-  comment: string;
-  date: string;
-  rating: number;
-  reviewerEmail: string;
-  reviewerName: string;
-}
-
-export interface HighlightItem {
-  id: number;
-  title: string;
-  image: string;
-  category: string;
-  subCategory: string;
-  images: string[];
-  thumbnail: string;
-}
-
-export interface ProductItem extends HighlightItem {
-  description: string;
-  price: number;
-  rating: number;
-}
-
-export interface ProductCategory {
-  id: number;
-  name: string;
-  slug: string;
-  imageUrl: string;
-  featured: boolean;
-  subCategories: { id: number; name: string; slug: string }[];
-}
-
-export interface Product extends ProductItem {
-  stock: number;
-  tags: string[];
-  brand: string;
-  availabilityStatus: string;
-  discountPercentage: number;
-  returnPolicy: string;
-  reviews: Review[];
-  sku: string;
-  warrantyInformation: string;
-  shippingInformation: string;
-}
+import {
+  ProductAdditionalInformation,
+  ProductCategory
+} from "@/types/products";
 
 export const categories: ProductCategory[] = [
   {
@@ -139,3 +98,25 @@ export const categories: ProductCategory[] = [
     ]
   }
 ];
+
+export const productAdditionalInformation: ProductAdditionalInformation = {
+  dimensions: {
+    height: 90, // in cm
+    width: 180, // in cm
+    mattressSize: 78 // in inches (optional)
+  },
+  weight: {
+    productWight: 85, // in kg
+    maxLoad: 300 // in kg
+  },
+  material: {
+    frameMaterial: "Solid Oak Wood",
+    surfaceFinish: "Matte Polish"
+  },
+  color: "Walnut Brown",
+  assembly: true, // requires assembly
+  warranty: 24, // in months
+  brand: "FurniCraft",
+  seatingCapacity: 2, // optional (for sofa/bench)
+  storageAvailability: true // has storage drawers
+};

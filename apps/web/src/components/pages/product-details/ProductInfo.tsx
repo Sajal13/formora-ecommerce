@@ -1,7 +1,7 @@
-import { Product } from "@/data/products";
+import { Product } from "@/types/products";
 import { currencyFormat } from "@/utils/helper";
 import Rating from "@/components/base/Rating";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Radio from "@/components/base/Radio";
 import ProductQuantity from "@/components/common/ProductQuantity";
 import IconButton from "@/components/base/IconButton";
@@ -13,7 +13,7 @@ import {
   FaWhatsapp,
   FaRegHeart
 } from "react-icons/fa";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 interface ProductInfoProps {
@@ -35,11 +35,10 @@ const ProductInfoFormSchema: yup.ObjectSchema<ProductInfoFormValues> =
   });
 
 const ProductInfo = ({ item }: ProductInfoProps) => {
-  const [selectedSize, setSelectedSize] = useState("");
   const [copied, setCopied] = useState(false);
   const [tooltipText, setTooltipText] = useState("Add to whitelist");
   const pathName = usePathname();
-  const { register, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<ProductInfoFormValues>({
     resolver: yupResolver(ProductInfoFormSchema),
     defaultValues: {
       size: "l",
@@ -57,8 +56,8 @@ const ProductInfo = ({ item }: ProductInfoProps) => {
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelectedSize(e.target.value);
+  const handleFormSubmit = (data: ProductInfoFormValues) => {
+    console.log(data);
   };
 
   const handleWhitelist = () => {
@@ -68,7 +67,10 @@ const ProductInfo = ({ item }: ProductInfoProps) => {
   };
   return (
     <div>
-      <form className="border-b border-b-gray-300 mb-7 md:mb-10">
+      <form
+        className="border-b border-b-gray-300 mb-7 md:mb-10"
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-neutral-700 leading-relaxed">
           {item.title}
         </h2>
@@ -87,21 +89,35 @@ const ProductInfo = ({ item }: ProductInfoProps) => {
         <p className="text-neutral-700 mb-6">{item.description}</p>
         <p className="text-muted mb-4">Sizes</p>
         <div className="flex items-center gap-4 mb-6 md:mb-8">
-          {["l", "xl", "xs"].map((size) => (
-            <div key={size}>
-              <Radio
-                checked={size === selectedSize}
-                name="sizes"
-                label={size}
-                value={size}
-                className="uppercase"
-                handleChange={handleChange}
-              />
-            </div>
-          ))}
+          <Controller
+            name="size"
+            control={control}
+            render={({ field }) => (
+              <>
+                {["l", "xl", "xs"].map((size) => (
+                  <div key={size}>
+                    <Radio
+                      checked={field.value === size}
+                      name={field.name}
+                      label={size}
+                      value={size}
+                      className="uppercase"
+                      handleChange={(e) => field.onChange(e.target.value)}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          />
         </div>
         <div className="flex gap-4 items-center mb-10 md:mb-14">
-          <ProductQuantity />
+          <Controller
+            name="quantity"
+            control={control}
+            render={({ field }) => (
+              <ProductQuantity value={field.value} onChange={field.onChange} />
+            )}
+          />
           <button
             className={`h-[2.7rem] md:h-[3.55rem] w-[9rem] md:w-[13.438rem] flex 
         justify-center items-center border border-neutral-900 

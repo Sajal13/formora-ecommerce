@@ -1,9 +1,6 @@
 "use client";
-import { ProductItem } from "@/data/products";
+import { ProductItem } from "@/types/products";
 import React, { useState } from "react";
-import Image from "next/image";
-import { currencyFormat } from "@/utils/helper";
-import Rating from "@/components/base/Rating";
 import Button from "@/components/base/Button";
 import Link from "next/link";
 import Swiper from "@/components/base/Swiper";

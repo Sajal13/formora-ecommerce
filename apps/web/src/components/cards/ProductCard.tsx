@@ -1,4 +1,4 @@
-import { ProductItem } from "@/data/products";
+import { ProductItem } from "@/types/products";
 import React from "react";
 import { currencyFormat } from "@/utils/helper";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-import { ProductCategory, ProductItem } from "@/data/products";
+import { ProductCategory, ProductItem } from "@/types/products";
 
 export const currencyFormat = (
   amount: number,
@@ -39,6 +39,17 @@ export const categoryFilter = (
   });
 };
 
+export const numberFormat = (
+  num: number,
+  options?: Intl.NumberFormatOptions
+) => {
+  return new Intl.NumberFormat("en-BD", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    ...options
+  }).format(num);
+};
+
 export const productFilter = (query: string, products: ProductItem[]) => {
   const normalizedQuery = query.toLowerCase().trim();
   if (!normalizedQuery) return products;
@@ -49,3 +60,24 @@ export const productFilter = (query: string, products: ProductItem[]) => {
     )
   );
 };
+
+export const getFileExtension = (fileName: string, separator = ".") =>
+  fileName.split(separator).pop() || "unknown";
+
+export const isImageFile = (file: File) => {
+  const imageMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/bmp",
+    "image/webp"
+  ];
+  return imageMimeTypes.includes(file.type);
+};
+
+export const convertFileToAttachment = (file: File) => ({
+  name: file.name,
+  size: `${(file.size / 1024).toFixed(2)} KB`,
+  format: getFileExtension(file.name),
+  preview: isImageFile(file) ? URL.createObjectURL(file) : undefined
+});

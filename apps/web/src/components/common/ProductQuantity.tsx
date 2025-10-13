@@ -1,35 +1,38 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 
-const ProductQuantity = () => {
-  const [quantity, setQuantity] = useState<number | string>(1);
+interface ProductQuantityProps {
+  value: number;
+  onChange: (value: number) => void;
+}
 
-  const increase = () => setQuantity((prev) => (Number(prev) || 0) + 1);
+const ProductQuantity = ({ value, onChange }: ProductQuantityProps) => {
+  const increase = () => onChange(value + 1);
 
-  const decrease = () =>
-    setQuantity((prev) => (Number(prev) > 1 ? Number(prev) - 1 : 1));
+  const decrease = () => {
+    if (value > 1) {
+      onChange(value - 1);
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     if (value === "") {
-      setQuantity("");
-    } else if (/^\d+$/.test(value)) {
-      setQuantity(Number(value));
-    }
-  };
-
-  const handleBlur = () => {
-    if (quantity === "" || Number(quantity) < 1) {
-      setQuantity(1);
+      onChange(0);
+    } else {
+      const parsed = Number(value);
+      onChange(parsed < 1 ? 1 : parsed);
     }
   };
 
   return (
     <div className="flex items-center border rounded-lg md:p-2 w-[8rem]">
       <button
+        type="button"
         onClick={decrease}
+        disabled={value < 1}
         className="text-lg font-medium px-2 hover:text-red-500 cursor-pointer"
       >
         −
@@ -37,12 +40,13 @@ const ProductQuantity = () => {
       <input
         type="number"
         name="quantity"
-        value={quantity}
+        min={1}
+        value={value}
         onChange={handleChange}
-        onBlur={handleBlur}
         className="w-full text-center outline-0 py-2"
       />
       <button
+        type="button"
         onClick={increase}
         className="text-lg font-medium px-2 hover:text-green-500 cursor-pointer"
       >

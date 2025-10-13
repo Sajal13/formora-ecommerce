@@ -25,7 +25,7 @@ const ProductSlider = ({ images }: ProductSliderProps) => {
           {images.map((image) => (
             <SwiperSlide key={image}>
               <div className="bg-tertiary rounded-2xl h-[31.25rem] w-[26.438rem] flex items-center">
-                <Image src={image} alt="image" height={500} width={423} />
+                <Image src={image} alt="image" width={423} height={500} />
               </div>
             </SwiperSlide>
           ))}

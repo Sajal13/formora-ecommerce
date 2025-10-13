@@ -101,41 +101,32 @@ const FilterSidebar = () => {
     );
   }, []);
 
-  // ensure sidebar open on xl
   useEffect(() => {
     if (window.innerWidth >= 1280) {
       setShowFilter(true);
     }
   }, [setShowFilter]);
 
-  // Next.js navigation
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // Helper function to append array values to params
     const appendArrayParam = (key: keyof typeof filters) => {
       const value = filters[key];
       params.delete(key);
       if (Array.isArray(value) && value.length > 0) {
-        value.forEach((v) => params.append(key, String(v)));
+        params.set(key, value.join(","));
       }
     };
 
-    // Always include these
     (["availability", "size"] as (keyof FilterFormValues)[]).forEach(
       appendArrayParam
     );
 
-    // Include categories only if needed
     if (showCategoriesAccordion) {
       appendArrayParam("categories");
     }
 
-    // Handle price only if changed from default
-    if (
-      Array.isArray(filters.price) &&
-      (filters.price[0] !== values[0] || filters.price[1] !== values[1])
-    ) {
+    if (Array.isArray(filters.price) && filters.price.length === 2) {
       params.set("priceMin", String(filters.price[0]));
       params.set("priceMax", String(filters.price[1]));
     } else {
@@ -143,7 +134,9 @@ const FilterSidebar = () => {
       params.delete("priceMax");
     }
 
-    router.push(`${pathName}?${params.toString()}`, { scroll: false });
+    router.push(`${pathName}?${decodeURIComponent(params.toString())}`, {
+      scroll: false
+    });
   }, [
     filters,
     router,

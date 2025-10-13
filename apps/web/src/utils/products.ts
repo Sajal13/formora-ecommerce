@@ -14,5 +14,6 @@ export const getProductById = async (id: number) => {
   });
 
   const data = await response.json();
+  console.log(data);
   return data;
 };

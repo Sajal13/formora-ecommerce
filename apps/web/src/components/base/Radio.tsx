@@ -23,7 +23,6 @@ const Radio = ({
   className,
   shape = "square"
 }: RadioProps) => {
-  console.log(checked);
   const radioClass = twMerge(
     "text-medium",
     "cursor-pointer",

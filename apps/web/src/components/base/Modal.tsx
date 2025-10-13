@@ -12,6 +12,7 @@ interface ModalProps {
   className?: string;
   title?: string;
   titleClass?: string;
+  buttonClass?: string;
 }
 const Modal = ({
   open,
@@ -20,6 +21,7 @@ const Modal = ({
   modalClass,
   title,
   titleClass,
+  buttonClass,
   children
 }: PropsWithChildren<ModalProps>) => {
   return (
@@ -37,7 +39,7 @@ const Modal = ({
             {/* Modal content */}
             <div className={classNames("relative", className)}>
               {/* Modal header */}
-              <div className="flex items-center justify-between p-4 md:p-5  rounded-t ">
+              <div className="flex items-center justify-between rounded-t p-4 md:p-5 ">
                 {title && (
                   <h4
                     className={classNames(
@@ -48,7 +50,10 @@ const Modal = ({
                     {title}
                   </h4>
                 )}
-                <IconButton onClick={() => setOpen && setOpen(false)}>
+                <IconButton
+                  className={classNames(buttonClass)}
+                  onClick={() => setOpen && setOpen(false)}
+                >
                   <GrClose />
                   <span className="sr-only">Close modal</span>
                 </IconButton>

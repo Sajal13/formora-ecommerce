@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import TopNavbar from "@/components/navbars/Navbar";
 import Footer from "@/components/footers/Footer";
+import { ToastProvider } from "@/provider/ToastProvider";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -73,7 +74,9 @@ export default function RootLayout({
         {/* Web Manifest */}
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }
