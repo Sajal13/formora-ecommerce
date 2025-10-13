@@ -1,14 +1,13 @@
 "use client";
 
 import { Product } from "@/types/products";
-import Link from "next/link";
 import React from "react";
-import { FaChevronRight } from "react-icons/fa";
 import ProductSlider from "./ProductSlider";
 import ProductInfo from "./ProductInfo";
 import ProductTab from "./ProductTab";
 import Breadcrumb from "@/components/common/Breadcrumb";
 import { BreadcrumbNavItem } from "@/types/common";
+import RelatedItems from "./RelatedItems";
 
 interface ProductDetailsContainerProps {
   item: Product;
@@ -35,6 +34,7 @@ const ProductDetailsContainer = ({ item }: ProductDetailsContainerProps) => {
       <hr className="text-gray-300" />
       <ProductTab item={item} />
       <hr className="text-gray-300" />
+      <RelatedItems category={item.category} />
     </section>
   );
 };
