@@ -1,4 +1,4 @@
-import { ProductItem } from "@/data/products";
+import { ProductItem } from "@/types/products";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense } from "react";
-import { type HighlightItem } from "@/data/products";
+import { type HighlightItem } from "@/types/products";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import HeroSectionHighlightItem from "./HeroSectionHighlightItem";

@@ -67,13 +67,13 @@ const Banners = ({
                           ? "/category"
                           : `/category/${item}`
                     }
-                    className={`capitalize text-sm sm:text-base 2xl:text-lg`}
+                    className={`capitalize text-sm sm:text-base 2xl:text-lg line-clamp-1`}
                   >
                     {item === "/" ? "Home" : `${item.split("-").join(" ")}`}
                   </Link>
                 )}
                 {array.length - 1 === index && (
-                  <p className="text-warning capitalize text-sm sm:text-base 2xl:text-lg">
+                  <p className="text-warning capitalize text-sm sm:text-base 2xl:text-lg line-clamp-1">
                     {item.split("-").join(" ")}
                   </p>
                 )}

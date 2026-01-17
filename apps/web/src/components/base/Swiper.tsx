@@ -47,7 +47,7 @@ const Swiper = ({
           <button
             ref={navigationPrevRef}
             className={classNames(
-              "rounded-full z-50 swiper-button-prev bg-white/50 p-2 text-neutral-900 absolute left-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
+              "rounded-full z-50 swiper-button-prev p-2 text-neutral-900 absolute left-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
               prevButtonClassName
             )}
             style={navigationPosition}
@@ -57,7 +57,7 @@ const Swiper = ({
           <button
             ref={navigationNextRef}
             className={classNames(
-              "rounded-full z-50 swiper-button-next bg-white/50 p-2 text-neutral-900 absolute right-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
+              "rounded-full z-50 swiper-button-next p-2 text-neutral-900 absolute right-2 top-1/2 -translate-y-1/2 md:text-lg lg:text-xl",
               nextButtonClassName
             )}
             style={navigationPosition}
@@ -71,7 +71,7 @@ const Swiper = ({
       {pagination && (
         <div
           ref={paginationRef}
-          className="custom-swiper-pagination absolute -bottom-[10%] lg:-bottom-[20%] left-0 w-full flex justify-center gap-2"
+          className="custom-swiper-pagination absolute top-full left-0 w-full flex justify-center gap-2"
         ></div>
       )}
 

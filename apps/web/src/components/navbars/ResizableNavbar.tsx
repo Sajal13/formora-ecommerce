@@ -11,7 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaAngleDown } from "react-icons/fa";
 import { Route } from "@/data/navitems";
-import { ProductCategory } from "@/data/products";
+import { ProductCategory } from "@/types/products";
 import classNames from "classnames";
 
 // Define the type for the component props

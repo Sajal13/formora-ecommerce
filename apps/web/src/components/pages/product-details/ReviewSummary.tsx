@@ -24,6 +24,8 @@ const ReviewSummary = ({ reviews, className }: ReviewSummaryProps) => {
         ).length
     );
 
+    console.log(ratingCounts);
+
     const averageRating =
       reviews.reduce((sum, r) => sum + r.rating, 0) / (totalReviews || 1);
 

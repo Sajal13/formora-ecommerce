@@ -1,4 +1,5 @@
-import { ProductCategory, ProductItem } from "@/types/products";
+import { BreadcrumbNavItem } from "@/types/common";
+import { Product, ProductCategory, ProductItem } from "@/types/products";
 
 export const currencyFormat = (
   amount: number,
@@ -81,3 +82,12 @@ export const convertFileToAttachment = (file: File) => ({
   format: getFileExtension(file.name),
   preview: isImageFile(file) ? URL.createObjectURL(file) : undefined
 });
+
+export const navItems = (item: Product): BreadcrumbNavItem[] => {
+  return [
+    { id: 1, title: "Home", link: "/" },
+    { id: 2, title: "Category", link: "/category" },
+    { id: 3, title: item.category, link: `/category/${item.category}` },
+    { id: 4, title: item.title, link: "#", isActive: true }
+  ];
+};

@@ -6,22 +6,12 @@ import ProductSlider from "./ProductSlider";
 import ProductInfo from "./ProductInfo";
 import ProductTab from "./ProductTab";
 import Breadcrumb from "@/components/common/Breadcrumb";
-import { BreadcrumbNavItem } from "@/types/common";
+import { navItems } from "@/utils/helper";
 import RelatedItems from "./RelatedItems";
 
 interface ProductDetailsContainerProps {
   item: Product;
 }
-
-const navItems = (item: Product): BreadcrumbNavItem[] => {
-  return [
-    { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Category", link: "/category" },
-    { id: 3, title: item.category, link: `/category/${item.category}` },
-    { id: 4, title: item.title, link: "#", isActive: true }
-  ];
-};
-
 const ProductDetailsContainer = ({ item }: ProductDetailsContainerProps) => {
   const breadcrumbItems = navItems(item);
   return (

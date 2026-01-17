@@ -9,23 +9,23 @@ import { FaCartShopping } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/images/logo/logo.png";
-import Avatar from "@/assets/images/avatar/avatar-2.jpg";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { routes } from "@/data/navitems";
 import MobileMenuItem from "./MobileMenuItem";
-import { MdLogin, MdLogout } from "react-icons/md";
 import Search from "./Search";
 import Modal from "../base/Modal";
 import ResizableNavbar from "./ResizableNavbar";
 import { categories } from "@/data/products";
-import { LuUserPlus } from "react-icons/lu";
+import UserDropdown from "./UserDropdown";
 
 const TopNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [profileDropdownShow, setProfileDropdownShow] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+
   const isLoggedIn = false;
 
   const navRef = useRef(null);
@@ -77,6 +77,15 @@ const TopNavbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const searchButtonClicked = () => {
+    setModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleUserButtonClick = () => {
+    setIsMenuOpen(false);
+    setIsProfileModalOpen(true);
+  };
   return (
     <>
       <header
@@ -110,9 +119,11 @@ const TopNavbar = () => {
                 <FaRegHeart />
               </IconButton>
               {/* Cart Icon */}
-              <IconButton>
-                <FaCartShopping />
-              </IconButton>
+              <div className="">
+                <IconButton>
+                  <FaCartShopping />
+                </IconButton>
+              </div>
 
               {/* Profile Icon with click-based dropdown */}
               <div className="relative group" ref={profileDropdownRef}>
@@ -131,51 +142,7 @@ const TopNavbar = () => {
                     }
                   )}
                 >
-                  <div className="px-4 py-3 flex items-center gap-3">
-                    <div className="overflow-hidden w-9 h-9 rounded-full border border-gray-200">
-                      <Image src={Avatar} alt="avatar" />
-                    </div>
-                    <div>
-                      <span className="block text-sm text-gray-900">
-                        Bonnie Green
-                      </span>
-                      <span className="block text-sm  text-gray-500 truncate">
-                        name@flowbite.com
-                      </span>
-                    </div>
-                  </div>
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                      <Link
-                        href="#"
-                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Settings
-                      </Link>
-                    </li>
-                    {!isLoggedIn && (
-                      <li>
-                        <Link
-                          href="/auth/sign-up"
-                          className="flex items-center justify-between gap-3 py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Sign Up
-                          <span>
-                            <LuUserPlus />
-                          </span>
-                        </Link>
-                      </li>
-                    )}
-                    <li>
-                      <Link
-                        href="/auth/sign-in"
-                        className="flex items-center justify-between gap-3 py-2 px-4 text-sm text-danger hover:bg-gray-100 hover:text-red-700"
-                      >
-                        {isLoggedIn ? "Log out" : "Log in"}
-                        <span>{isLoggedIn ? <MdLogout /> : <MdLogin />}</span>
-                      </Link>
-                    </li>
-                  </ul>
+                  <UserDropdown isLoggedIn={isLoggedIn} />
                 </div>
               </div>
             </div>
@@ -226,7 +193,7 @@ const TopNavbar = () => {
               {/* Icons (Right part) */}
               <div className="px-6  mt-auto pt-4 flex items-center justify-around text-neutral-900">
                 {/* Search Icon */}
-                <IconButton onClick={() => setModalOpen(true)}>
+                <IconButton onClick={searchButtonClicked}>
                   <BiSearch />
                 </IconButton>
                 {/* Heart Icon */}
@@ -234,7 +201,7 @@ const TopNavbar = () => {
                   <FaRegHeart />
                 </IconButton>
                 {/* Profile Icon */}
-                <IconButton>
+                <IconButton onClick={handleUserButtonClick}>
                   <FaUser />
                 </IconButton>
               </div>
@@ -273,6 +240,18 @@ const TopNavbar = () => {
       >
         <div className="min-h-[40rem] min-w-[22rem] p-5">
           <Search variant="modal" />
+        </div>
+      </Modal>
+      <Modal
+        modalClass="flex items-center justify-center"
+        className="bg-gray-200 mx-auto rounded-xl"
+        title="User"
+        open={isProfileModalOpen}
+        setOpen={setIsProfileModalOpen}
+        titleClass="text-neutral-700 text-xl"
+      >
+        <div className="min-h-full min-w-80 pb-4 md:pb-5 ">
+          <UserDropdown isLoggedIn={isLoggedIn} />
         </div>
       </Modal>
     </>

@@ -2,7 +2,8 @@
 
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { categories, ProductItem } from "@/data/products";
+import { categories } from "@/data/products";
+import { ProductItem } from "@/types/products";
 import { debounce } from "lodash";
 import { categoryFilter, currencyFormat, productFilter } from "@/utils/helper";
 import { getAllProducts } from "@/utils/products";
@@ -141,7 +142,7 @@ const Search = ({ variant = "navbar" }: SearchProps) => {
                   {filteredProducts.length > 8 && (
                     <li className="">
                       <Button variant="outline" className="w-full">
-                        <Link href="/">See More Products</Link>
+                        <Link href="/category">See More Products</Link>
                       </Button>
                     </li>
                   )}
@@ -157,7 +158,7 @@ const Search = ({ variant = "navbar" }: SearchProps) => {
                   {filteredCategories.length > 8 && (
                     <li className="">
                       <Button variant="outline" className="w-full">
-                        <Link href="/">See More Categories</Link>
+                        <Link href="/category">See More Categories</Link>
                       </Button>
                     </li>
                   )}

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
 import IconButton from "../base/IconButton";
 import Link from "next/link";
-import { ProductCategory } from "@/data/products";
+import { ProductCategory } from "@/types/products";
 
 interface MobileMenuItemProps {
   toggleMenu?: () => void;

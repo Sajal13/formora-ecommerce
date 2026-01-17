@@ -23,7 +23,7 @@ const Breadcrumb = ({ className, navItems }: BreadcrumbProps) => {
             <>
               <Link
                 href={item.link}
-                className="text-neutral-700 hover:text-neutral-800"
+                className="text-neutral-700 hover:text-neutral-800 !line-clamp-1"
               >
                 {item.title}
               </Link>

@@ -1,12 +1,12 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import Button from "@/components/base/Button";
 import Swiper from "@/components/base/Swiper";
 import ProductCard from "@/components/cards/ProductCard";
 import { ProductItem } from "@/types/products";
 import { getAllProducts } from "@/utils/products";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
 import { SwiperSlide } from "swiper/react";
 
 interface RelatedItemsProps {
@@ -31,7 +31,7 @@ const RelatedItems = ({ category }: RelatedItemsProps) => {
 
   return (
     <section className="container mx-auto pt-7 md:pt-10 lg:pt-14 px-4 md:px-6">
-      <div className="mb-8 md:mb-12 xl:mb-16">
+      <div className="text-center mb-8 md:mb-12 xl:mb-16">
         <h4 className="font-medium text-xl md:text-2xl lg:text-3xl text-neutral-900 mb-3">
           Related Products
         </h4>
@@ -52,6 +52,8 @@ const RelatedItems = ({ category }: RelatedItemsProps) => {
           1280: { slidesPerView: 4 }
         }}
         className="mb-10 md:mb-12 xl:mb-16"
+        nextButtonClassName="bg-white/50"
+        prevButtonClassName="bg-white/50"
       >
         {products.map((item) => (
           <SwiperSlide key={item.id}>
